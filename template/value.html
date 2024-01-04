@@ -75,34 +75,39 @@
   </div>
 
     <button id='csv' class="btn btn-primary">Télecharger csv</button>
-
+{% include "includes/footer.html" %}
   </div>
 
-  <script>
-       
-    var selectEl = $('#mon_select');
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectEl = document.getElementById('mon_select');
 
-    selectEl.change(function() {
-        $('#my-form').submit();
+        if (selectEl) {
+            selectEl.addEventListener('change', function () {
+                document.getElementById('my-form').submit();
+            });
+        }
+
+        var downloadButton = document.getElementById('csv');
+        if (downloadButton) {
+            downloadButton.addEventListener('click', function () {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/download_csv/', true);
+                xhr.responseType = 'blob';
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        var url = window.URL.createObjectURL(xhr.response);
+                        var a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'model_values.csv';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    }
+                };
+                xhr.send();
+            });
+        }
     });
-
-    var downloadButton = document.getElementById('csv');
-  downloadButton.addEventListener('click', function() {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', '/download_csv/', true);
-  xhr.responseType = 'blob';
-  xhr.onload = function() {
-  if (xhr.status === 200) {
-    var url = window.URL.createObjectURL(xhr.response);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'model_values.csv';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
-  };
-  xhr.send();
-  });
 </script>
 {% endblock content %}
