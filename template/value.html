@@ -1,41 +1,80 @@
-{% extends 'base.html' %}
-{% block i %}
+{% extends 'layouts/base.html' %}
 {% load static %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<div  class="show-row">
-    <h3>Dashbord/Table/Last</h3>
-       <form method="post" id="my-form" >
-        {% csrf_token %}
-        {{form}}
-    </form>
-    
-</div>
-<div class="projects">
 
-  <div class ="tables" >
-     <table>
+{% block content %}
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img src="{% static 'img/dht.png' %}" class="avatar avatar-sm me-3 text-center" alt="dht">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm text-center">Nom</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img src="{% static 'img/temperature.png' %}" class="avatar avatar-sm me-3 text-center" alt="Temperature">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm text-center">Temperature</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img src="{% static 'img/humidity.png' %}" class="avatar avatar-sm me-3 text-center" alt="Humidity">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm text-center">Humidity</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img src="{% static 'img/date.png' %}" class="avatar avatar-sm me-3 text-center" alt="Date">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm text-center">Date</h6>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0 text-center">DHT 11</p>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0 text-center">{{ valeurs.temp }}°c</p>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0 text-center">{{ valeurs.hum }}%</p>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0 text-center">{{ valeurs.date }}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <thead class="DIV">
-        <tr>
-            <th>Nom <img  id="Capteur-logo" src="{% static 'images/dht11.jpg' %}" alt="Capteur Image"></th>
-            <th>Temperature <img  id="Temperature-logo" src="{% static 'images/temp.jpg' %}" alt="Temperature Image"></th>
-            <th>Humidity  <img id="Humidity-logo" src="{% static 'images/humidity.jpg' %}" alt="Humidity Image"></th>
-            <th>Date <img id="Humidity-logo" src="{% static 'images/time.jpg' %}" alt="Humidity Image"> </th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <tr>
-            <td><a href="{% url 'myChart' %}" >DHT 11</a></td>
-<td>{{ valeurs.temp }} </td>
-            <td>{{ valeurs.hum }}</td>
-            <td>{{ valeurs.date }}</td>
-        </tr>
-       
-    </tbody>
-</table>
-</div>
-<button id='csv' >Télecharger csv</button>
+    <button id='csv' class="btn btn-primary">Télecharger csv</button>
 
   </div>
 
@@ -48,24 +87,22 @@
     });
 
     var downloadButton = document.getElementById('csv');
-downloadButton.addEventListener('click', function() {
-var xhr = new XMLHttpRequest();
-xhr.open('GET', '/download_csv/', true);
-xhr.responseType = 'blob';
-xhr.onload = function() {
-if (xhr.status === 200) {
-  var url = window.URL.createObjectURL(xhr.response);
-  var a = document.createElement('a');
-  a.href = url;
-  a.download = 'model_values.csv';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
-};
-xhr.send();
-});
-
- 
+  downloadButton.addEventListener('click', function() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '/download_csv/', true);
+  xhr.responseType = 'blob';
+  xhr.onload = function() {
+  if (xhr.status === 200) {
+    var url = window.URL.createObjectURL(xhr.response);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'model_values.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  };
+  xhr.send();
+  });
 </script>
-{% endblock i %}
+{% endblock content %}

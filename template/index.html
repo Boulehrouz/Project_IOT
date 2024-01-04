@@ -1,25 +1,60 @@
-<head>
-    {% load static %}
-<link rel="stylesheet" href="{% static 'css/style2.css' %}">
+{% extends 'layouts/base.html' %}
+{% load static %}
 
-</head>
-<body>
-    {% load static %}
-  <div class="navbar"  style="background-image: url({% static 'images/HD.jpg' %}) ; ">
-    <nav >
-        <h2 class="logo">IOT</h2>
+{% block content %}
 
-            <ul>
-                    <li>  <a href="aff/" >Table</a></li>
-                    <li>  <a href="{% url 'index' %}" >Chart</a></li>
-                    <li>  <a href="#" >Json</a></li>
+    <div class="container-fluid py-4">
 
 
-            </ul>
-            <p> </p>
 
+      <div class="row mt-4">
+        <div class="ms-auto">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="d-flex flex-column h-100 align-items-center">
+                    <h5 class="font-weight-bolder">Introduction</h5>
+                    <p class="mb-5 text-center">Welcome to the index page of our project, where we embark on a journey through the intricate details of creating a seamlessly integrated system. This project is a culmination of innovation, technology, and practicality. Our primary goal is to guide you through the step-by-step process of designing and implementing a sophisticated application, incorporating both software and hardware elements. Let's delve into the essence of each section and the reasons behind their creation.</p>
 
-    </nav>
-</div>
+                    <h5 class="font-weight-bolder text-center">Part 1: Material Elements and Project Objectives</h5>
+                    <p class="mb-5 text-center">In this section, we lay the foundation by discussing the essential material elements for our application's design. From development tools to hardware resources, we will meticulously outline the objectives, hardware, and software requirements. Understanding these elements is crucial for a successful project implementation.</p>
 
-</body>
+                    <h5 class="font-weight-bolder text-center">Part 2: Web Application Development with Django RestApi</h5>
+                    <p class="mb-5 text-center">The second part unfolds the journey of creating our web application using the Django RestApi Framework. We will guide you through each step, detailing the development process, and exploring features such as alarm notifications via email and WhatsApp. This section is designed to provide comprehensive insights into the development steps required for a robust application.</p>
+
+                    <h5 class="font-weight-bolder text-center">Part 3: PCB Creation - Design to Manufacturing</h5>
+                    <p class="mb-5 text-center">Focusing on the hardware aspect, this section illuminates the creation of the Printed Circuit Board (PCB). From designing the electrical diagram to manufacturing, we will discuss key steps, necessary tools, and best practices for ensuring a functional and high-quality PCB.</p>
+
+                    <h5 class="font-weight-bolder text-center">Part 4: Arduino Device Installation and Configuration</h5>
+                    <p class="mb-5 text-center">Delving into the integration of Arduino devices, this section guides you through the installation and configuration process. Learn how to collect data from sensors and seamlessly send it to the web application. We'll explore good practices in data management and communication with the application.</p>
+
+                    <h5 class="font-weight-bolder text-center">Part 5: Web Application Deployment on Django Anywhere</h5>
+                    <p class="mb-5 text-center">Here, we will guide you through the intricate process of deploying the web application on Django Anywhere. Covering steps to configure the hosting environment, transfer files, and ensure proper functionality, this section ensures a smooth transition from development to the online application.</p>
+
+                  </div>
+                </div>
+                <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
+                  <div class="bg-gradient-primary border-radius-lg h-100">
+                    <img src="{% static 'img/shapes/waves-white.svg' %}" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
+                    <div class="position-relative d-flex align-items-center justify-content-center h-100">
+                      <img class="w-100 position-relative z-index-2 pt-4" src="{% static 'img/Introduction.png' %}" alt="IOT">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block scripts %}
+
+{% endblock scripts %}

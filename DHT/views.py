@@ -9,6 +9,9 @@ from datetime import timedelta
 import datetime
 import telepot
 
+
+def index(request):
+    return render(request, 'index.html' )
 def table(request):
     derniere_ligne = Dht11.objects.last()
     derniere_date = Dht11.objects.last().dt
@@ -30,9 +33,6 @@ def download_csv(request):
     for row in liste:
         writer.writerow(row)
     return response
-#pour afficher navbar de template
-def index_view(request):
-    return render(request, 'index.html')
 
 #pour afficher les graphes
 def graphique(request):
