@@ -3,6 +3,32 @@
 
 {% block content %}
 
+<style>
+    .graphique-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.navb {
+    margin-bottom: 20px;
+}
+
+.btn {
+    margin-right: 10px;
+}
+
+.graphique-temp,
+.graphique-hum {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+</style>
 
 <div class="graphique">
     <div class="navb">
@@ -19,6 +45,44 @@
 <canvas  id="graphique-hum"  height="220"> </canvas>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+    const updateContainerStyles = (containerSelector, borderColor) => {
+        const container = document.querySelector(containerSelector);
+        if (container) {
+            container.style.border = `2px solid ${borderColor}`;
+            container.style.borderRadius = '10px';
+            container.style.padding = '15px';
+            container.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+        }
+    };
+
+    const updateChartStyles = (chartId, backgroundColor, lineColor, pointStyle, pointRadius, pointBorderColor, dataValues) => {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        const myChart = new Chart(ctx, {
+            // ... Your existing chart configuration
+            datasets: [{
+                label: 'La valeur de Température',
+                data: dataValues,
+                backgroundColor: backgroundColor, // Change this line to set the background color
+                borderColor: lineColor,
+                borderWidth: 1,
+                pointStyle: pointStyle,
+                pointRadius: pointRadius,
+                pointBorderColor: pointBorderColor,
+            }]
+        });
+    };
+
+    // Usage examples
+    updateContainerStyles('.graphique-temp', '#4CAF50');
+    updateContainerStyles('.graphique-hum', '#3498db');
+
+    const tempDataValues = [/* ... Temp data values ... */];
+    updateChartStyles('graphique-temp', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.8)', 'circle', 5, 'red', tempDataValues);
+
+    const humDataValues = [/* ... Humidity data values ... */];
+    updateChartStyles('graphique-hum', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.8)', 'rect', 8, 'blue', humDataValues);
+</script>
 <script>
 
   const aujourdhuiLink = document.getElementById('aujourdhui-link');
@@ -44,7 +108,7 @@
                     datasets: [{
                         label: 'La valeur de Températeur',
                         data: dataValues,
-                        backgroundColor: '#ccc5b9',
+                        backgroundColor: '#90EE90',
                         borderColor: 'rgba(0,0,0, 0.5)' ,
                         borderWidth: 1,
                         pointStyle: 'circles',
@@ -91,7 +155,7 @@
                     datasets: [{
                         label: 'La valeur de Humidité',
                         data: dataValues,
-                        backgroundColor: '#ccc5b9',
+                        backgroundColor: '#ADD8E6',
                         borderColor: 'rgba(0,0,0, 0.5)' ,
                         borderWidth: 1,
                         pointStyle: 'circles',
@@ -144,7 +208,7 @@
                     datasets: [{
                         label: 'La valeur de Températeur',
                         data: dataValues,
-                        backgroundColor: '#ccc5b9',
+                        backgroundColor: '#90EE90',
                         borderColor: 'rgba(0,0,0, 0.5)' ,
                         borderWidth: 1,
                         pointStyle: 'circles',
@@ -191,7 +255,7 @@
                     datasets: [{
                         label: 'La valeur de Humidité',
                         data: dataValues,
-                        backgroundColor: '#ccc5b9',
+                        backgroundColor: '#ADD8E6',
                         borderColor: 'rgba(0,0,0, 0.5)' ,
                         borderWidth: 1,
                         pointStyle: 'circles',
@@ -245,7 +309,7 @@
                     datasets: [{
                         label: 'La valeur de Températeur',
                         data: dataValues,
-                        backgroundColor: '#ccc5b9',
+                        backgroundColor: '#90EE90',
                         borderColor: 'rgba(0,0,0, 0.5)' ,
                         borderWidth: 1,
                         pointStyle: 'circles',
@@ -292,7 +356,7 @@
                     datasets: [{
                         label: 'La valeur de Humidité',
                         data: dataValues,
-                        backgroundColor: '#ccc5b9',
+                        backgroundColor: '#ADD8E6',
                         borderColor: 'rgba(0,0,0, 0.5)' ,
                         borderWidth: 1,
                         pointStyle: 'circles',
@@ -350,7 +414,7 @@
                     datasets: [{
                         label: 'La valeur de Températeur',
                         data: dataValues,
-                        backgroundColor: '#ccc5b9',
+                        backgroundColor: '#90EE90',
                         borderColor: 'rgba(0,0,0, 0.5)' ,
                         borderWidth: 1,
                         pointStyle: 'circles',
@@ -397,7 +461,7 @@
                     datasets: [{
                         label: 'La valeur de Humidité',
                         data: dataValues,
-                        backgroundColor: '#ccc5b9',
+                        backgroundColor: '#ADD8E6',
                         borderColor: 'rgba(0,0,0, 0.5)' ,
                         borderWidth: 1,
                         pointStyle: 'circles',
@@ -430,6 +494,45 @@
         });
         
 </script>
+<script>
+    const updateContainerStyles = (containerSelector, borderColor) => {
+        const container = document.querySelector(containerSelector);
+        if (container) {
+            container.style.border = `2px solid ${borderColor}`;
+            container.style.borderRadius = '10px';
+            container.style.padding = '15px';
+            container.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+        }
+    };
+
+    const updateChartStyles = (chartId, backgroundColor, lineColor, pointStyle, pointRadius, pointBorderColor, dataValues) => {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        const myChart = new Chart(ctx, {
+            // ... Your existing chart configuration
+            datasets: [{
+                label: 'La valeur de Température',
+                data: dataValues,
+                backgroundColor: backgroundColor,
+                borderColor: lineColor,
+                borderWidth: 1,
+                pointStyle: pointStyle,
+                pointRadius: pointRadius,
+                pointBorderColor: pointBorderColor,
+            }]
+        });
+    };
+
+    // Usage examples
+    updateContainerStyles('.graphique-temp', '#4CAF50');
+    updateContainerStyles('.graphique-hum', '#3498db');
+
+    const tempDataValues = [/* ... Temp data values ... */];
+    updateChartStyles('graphique-temp', 'rgba(173, 216, 230, 0.2)', 'rgba(30, 144, 255, 0.8)', 'circle', 5, 'blue', tempDataValues);
+
+    const humDataValues = [/* ... Humidity data values ... */];
+    updateChartStyles('graphique-hum', 'rgba(144, 238, 144, 0.2)', 'rgba(34, 139, 34, 0.8)', 'rect', 8, 'green', humDataValues);
+</script>
+
 
 </div>
 {% endblock content %}
