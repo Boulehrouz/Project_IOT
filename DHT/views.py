@@ -115,3 +115,8 @@ def sendtele():
     bot = telepot.Bot(token)
     bot.sendMessage(rece_id, 'la température depasse la normale')
     print(bot.sendMessage(rece_id, 'OK.'))
+
+class Dhtviews(generics.ListCreateAPIView):
+    queryset = Dht11.objects.all()
+    serializer_class = DHT11serialize
+
