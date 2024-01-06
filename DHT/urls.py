@@ -5,7 +5,7 @@ from . import api
 urlpatterns = [
     path('', views.index, name='index'),
     path("api/",api.Dlist,name='json'),
-    path("api/post",api.Dhtviews.as_view(),name='json'),
+    path("api/post/",api.Dhtviews.as_view(),name='json'),
     path('download_csv/', views.download_csv, name='download_csv'),
     path('tables/',views.table,name='value'),
     path('index/',views.index,name='index'),

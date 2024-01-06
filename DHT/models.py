@@ -1,3 +1,5 @@
+import logging
+
 from django.core.mail import send_mail
 from django.db import models
 
@@ -16,16 +18,15 @@ class Dht11(models.Model):
             if self.temp is not None and self.temp > 10:
                 from DHT.views import sendtele
                 sendtele()
-                send_mail(
-                    "température dépasse la normale," + str(self.temp),
-                    "anomalie dans la machine le," + str(self.dt),
-                    "bmdamv@gmail.com",
-                    ["maryem.badaoui.0608@gmail.com"],
-                    fail_silently=False,
-                )
+
+                subject = f"Température dépasse la normale: {self.temp}"
+                message = f"Anomalie dans la machine le {self.dt}"
+                from_email = "bmdamv@gmail.com"
+                recipient_list = ["maryem.badaoui.0608@gmail.com"]
+
+                send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
             return super().save(*args, **kwargs)
 
         except Exception as e:
-            import logging
-            logging.error(f"An error occurred in save method: {e}")
+            logging.error(f"An error occurred in save method: {e}")
