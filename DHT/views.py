@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from rest_framework import generics
+
 from .models import Dht11  # Assurez-vous d'importer le modèle Dht11
 from django.utils import timezone
 import csv
@@ -8,6 +10,8 @@ from django.http import JsonResponse
 from datetime import timedelta
 import datetime
 import telepot
+
+from .serializers import DHT11serialize
 
 
 def index(request):
@@ -111,3 +115,7 @@ def sendtele():
     bot = telepot.Bot(token)
     bot.sendMessage(rece_id, 'la température depasse la normale')
     print(bot.sendMessage(rece_id, 'OK.'))
+
+class Dhtviews(generics.ListCreateAPIView):
+    queryset = Dht11.objects.all()
+    serializer_class = DHT11serialize
